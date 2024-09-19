@@ -1,0 +1,13 @@
+.container{
+    height: 500px;
+    background-color: aliceblue;
+    width: 400px;
+    margin: 115px auto;
+    align-items: center;
+}
+
+#inputs input{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
