@@ -1,0 +1,42 @@
+{
+    "product": [
+        {
+            "id": "productId",
+            "name": "productId",
+            "lable": "Product Id"
+        },
+        {
+            "id": "product",
+            "name": "product",
+            "lable": "Product"
+        },
+        {
+            "id": "component",
+            "name": "component",
+            "lable": "Component"
+        }
+    ],
+    "village": [
+        {
+            "id": "division",
+            "name": "division",
+            "lable": "Division"
+        },
+        {
+            "id": "district",
+            "name": "district",
+            "lable": "District"
+        },
+        {
+            "id": "village",
+            "name": "village",
+            "lable": "Village"
+        },
+        {
+            "id": "description",
+            "name": "description",
+            "lable": "Description"
+        }
+    ]
+
+}

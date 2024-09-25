@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 function Login(props) {
@@ -22,14 +22,23 @@ function Login(props) {
         }
 
         props.setIsLoggedIn(true)
+        props.handleMenu("dashboard")
     }
     return(
-        <Grid container spacing={2}>
+        <Box 
+            sx={{
+                backgroundColor : "blue",
+                p : 5,
+                borderRadius : 5,
+                color : "#fff",
+            }}
+        >
             <Grid item sm={12}>
                 <Typography variant="h3">Hi I am login page</Typography>
             </Grid>
-            <Grid item sm={4}>
+            <Grid item sm={12}>
                 <TextField
+                    fullWidth
                     required
                     label="Username"
                     id="username"
@@ -38,8 +47,9 @@ function Login(props) {
                     onChange={(e) => onChangeHandler(e)}
                 />
             </Grid>
-            <Grid item sm={4}>
-                <TextField 
+            <Grid item sm={12}>
+                <TextField
+                    fullWidth
                     required
                     label="Password"
                     id="pasword"
@@ -49,9 +59,9 @@ function Login(props) {
                 />
             </Grid>
             <Grid item sm={12}>
-                <Button variant="contained" onClick={() => handleLogin()}>Login</Button>
+                <Button fullWidth variant="contained" onClick={() => handleLogin()}>Login</Button>
             </Grid>
-        </Grid>
+        </Box>
     )
 }
 
