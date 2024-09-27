@@ -1,23 +1,34 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 function FormComponent(props) {
     const [entity, setEntity] = useState({})
+    const [count, setCount] = useState(0)
 
     const onValueChange = (e) =>{
         setEntity({...entity, [e.target.name] : e.target.value})
     }
 
     const handleSubmit = () =>{
-        console.log(entity);
+        let array = JSON.parse(localStorage.getItem("productData")) || []
+        console.log(array, typeof(array));
+        entity.id = count + 1
+        setCount(entity.id)
+        array.push(entity)
+        props.setRows(array)
+        localStorage.setItem("productData", JSON.stringify(array))
     }
 
     return(
-        <Grid container spacing={2}>
-            {props.inputDetails.map((item) => {
+        <Grid container spacing={2} mt={2}>
+            <Grid item sm={12} md={12} lg={12}>
+                <Typography variant="h2">{props.inputDetails.title}</Typography>
+            </Grid>
+            {props.inputDetails.inputInfo.map((item, index) => {
                 return(
-                    <Grid item sm={12} md={12} lg={4}>
+                    <Grid item sm={12} md={12} lg={4} key={index}>
                         <TextField
+                            required={item.required}
                             fullWidth
                             name={item.name}
                             label={item.lable}

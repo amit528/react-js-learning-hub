@@ -7,17 +7,18 @@ import Product from "./components/Product";
 import Village from "./components/Village";
 
 function AppWithoutRouter() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [appState, setAppState] = useState("home")
+    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("isLoggedIn") ? sessionStorage.getItem("isLoggedIn") : false)
+    const [appState, setAppState] = useState(sessionStorage.getItem("appState") ? sessionStorage.getItem("appState") : "home")    
 
     function handleMenu(menuName) {
         setAppState(menuName)
-    }
+        sessionStorage.setItem("appState", menuName)
+    }    
 
     return (
         <Box>
             <NavBar handleMenu={handleMenu} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            <Grid
+            {/* <Grid
                 container
                 spacing={2}
                 sx={{
@@ -26,10 +27,9 @@ function AppWithoutRouter() {
                     alignItems: "center",
                     height: "90vh"
                 }}
-            >
-
+            > */}
                 {
-                    (appState === "home" || appState === "logout") && <Home title="Welcome to SMK SOLUTIONS" />
+                    appState === "home" && <Home title="Welcome to SMK SOLUTIONS" />
                 }
                 {
                     appState === "login" && <Login setIsLoggedIn={setIsLoggedIn} handleMenu={handleMenu} />
@@ -46,7 +46,7 @@ function AppWithoutRouter() {
                 {
                     appState === "village" && <Village />
                 }
-            </Grid>
+            {/* </Grid> */}
         </Box>
     )
 }

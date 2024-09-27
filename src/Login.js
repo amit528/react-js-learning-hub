@@ -22,6 +22,7 @@ function Login(props) {
         }
 
         props.setIsLoggedIn(true)
+        sessionStorage.setItem("isLoggedIn", true)
         props.handleMenu("dashboard")
     }
     return(
@@ -31,6 +32,10 @@ function Login(props) {
                 p : 5,
                 borderRadius : 5,
                 color : "#fff",
+                width : "40%",
+                margin : "auto",
+                justifyContent : "center",
+                alignItems : "center"
             }}
         >
             <Grid item sm={12}>

@@ -1,42 +1,51 @@
 {
-    "product": [
-        {
-            "id": "productId",
-            "name": "productId",
-            "lable": "Product Id"
-        },
-        {
-            "id": "product",
-            "name": "product",
-            "lable": "Product"
-        },
-        {
-            "id": "component",
-            "name": "component",
-            "lable": "Component"
-        }
-    ],
-    "village": [
-        {
-            "id": "division",
-            "name": "division",
-            "lable": "Division"
-        },
-        {
-            "id": "district",
-            "name": "district",
-            "lable": "District"
-        },
-        {
-            "id": "village",
-            "name": "village",
-            "lable": "Village"
-        },
-        {
-            "id": "description",
-            "name": "description",
-            "lable": "Description"
-        }
-    ]
-
+    "product": {
+        "title": "Product form",
+        "inputInfo": [
+            {
+                "id": "productId",
+                "required" : true,
+                "name": "productId",
+                "lable": "Product Id"
+            },
+            {
+                "id": "product",
+                "name": "product",
+                "required" : true,
+                "lable": "Product"
+            },
+            {
+                "id": "component",
+                "name": "component",
+                "required" : true,
+                "lable": "Component"
+            }
+        ]
+    },
+    "village": {
+        "title": "Village Form",
+        "inputInfo": [
+            {
+                "id": "division",
+                "required" : true,
+                "name": "division",
+                "lable": "Division"
+            },
+            {
+                "id": "district",
+                "name": "district",
+                "lable": "District"
+            },
+            {
+                "id": "village",
+                "name": "village",
+                "lable": "Village"
+            },
+            {
+                "id": "description",
+                "name": "description",
+                "lable": "Description"
+            }
+        ]
+    }
 }

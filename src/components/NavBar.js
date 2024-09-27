@@ -5,7 +5,9 @@ const NavBar = (props) => {
 
   const handleLogout = () =>{
     props.setIsLoggedIn(false)
-    props.handleMenu("logout")
+    props.handleMenu("home")
+    // sessionStorage.removeItem("appState")
+    sessionStorage.removeItem("isLoggedIn")
   }
 
   return (
@@ -23,11 +25,11 @@ const NavBar = (props) => {
           <>
             <Button color="inherit" onClick={() => props.handleMenu("product")}>Product</Button>
             <Button color="inherit" onClick={() => props.handleMenu("village")}>Village</Button>
-            <Button color="inherit" onClick={() => props.handleMenu("props")}>Props</Button>
+            {/* <Button color="inherit" onClick={() => props.handleMenu("props")}>Props</Button>
             <Button color="inherit" onClick={() => props.handleMenu("hooks")}>Hooks</Button>
             <Button color="inherit" onClick={() => props.handleMenu("context")}>Context</Button>
             <Button color="inherit" onClick={() => props.handleMenu("form")}>Form</Button>
-            <Button color="inherit" onClick={() => props.handleMenu("pdc")}>PropsDemoCallback</Button>
+            <Button color="inherit" onClick={() => props.handleMenu("pdc")}>PropsDemoCallback</Button> */}
             <Button color="error" variant='contained' onClick={() => handleLogout()}>Logout</Button>
           </>
         }
