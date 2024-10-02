@@ -1,24 +1,23 @@
 import FormComponent from "./commonComponents/Form";
 import inputDetails from "../data/FormFields.json"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListComponent from "./commonComponents/List";
 
 function Village() {
-    const [rows, setRows] = useState(JSON.parse(localStorage.getItem("productData")) || [])
-
-    // const rows = [
-    //     { id: 1, division: 'Hello', district: 'World', village : "banahatti", desc : "None" },
-    //     { id: 2, division: 'Hello', district: 'World', village : "banahatti", desc : "None" },
-    //     { id: 3, division: 'Hello', district: 'World', village : "banahatti", desc : "None" },
-    //   ];
+    const [rows, setRows] = useState([])
 
     const columns = [
     { field: 'id', headerName: 'Id', width: 40 },
-    { field: 'division', headerName: 'Division', width: 150 },
-    { field: 'district', headerName: 'District', width: 150 },
-    { field: 'village', headerName: 'Village', width: 150 },
-    { field: 'description', headerName: 'Description', width: 150 },
+    { field: 'completed', headerName: 'Division', width: 150 },
+    { field: 'title', headerName: 'District', width: 150 },
+    { field: 'userId', headerName: 'Village', width: 150 },
     ];
+
+    useEffect(() =>{
+        fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => response.json())
+        .then(json => setRows(json))
+    })
 
     return(
         <>

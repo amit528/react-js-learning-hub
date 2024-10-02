@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, Grid, Grid2, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 function Login(props) {
@@ -21,51 +21,57 @@ function Login(props) {
             return
         }
 
-        props.setIsLoggedIn(true)
-        sessionStorage.setItem("isLoggedIn", true)
-        props.handleMenu("dashboard")
+        props.setAppState("dashboard")
+        sessionStorage.setItem("dashboardState", "Dashboard")
     }
     return(
-        <Box 
-            sx={{
-                backgroundColor : "blue",
-                p : 5,
-                borderRadius : 5,
-                color : "#fff",
-                width : "40%",
-                margin : "auto",
-                justifyContent : "center",
-                alignItems : "center"
+        <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Card style={{
+                padding: "20px",
+                width: 400,
+                marginBottom: "30px",
+                borderRadius: "20px",
+                boxShadow: "5px 10px 18px #888888",
             }}
         >
-            <Grid item sm={12}>
-                <Typography variant="h3">Hi I am login page</Typography>
-            </Grid>
-            <Grid item sm={12}>
-                <TextField
-                    fullWidth
-                    required
-                    label="Username"
-                    id="username"
-                    value={userDetails.username}
-                    name="username"
-                    onChange={(e) => onChangeHandler(e)}
-                />
-            </Grid>
-            <Grid item sm={12}>
-                <TextField
-                    fullWidth
-                    required
-                    label="Password"
-                    id="pasword"
-                    value={userDetails.password}
-                    name="password"
-                    onChange={(e) => onChangeHandler(e)}
-                />
-            </Grid>
-            <Grid item sm={12}>
-                <Button fullWidth variant="contained" onClick={() => handleLogin()}>Login</Button>
-            </Grid>
+            <Grid2 container gap={2}>
+                <Grid2 item lg={12}>
+                    <Typography variant="h3" textAlign={"center"}>SMK SOLUTIONS</Typography>
+                </Grid2>
+                <Grid2 item lg={12}>
+                    <TextField
+                        fullWidth
+                        required
+                        label="Username"
+                        id="username"
+                        value={userDetails.username}
+                        name="username"
+                        onChange={(e) => onChangeHandler(e)}
+                    />
+                </Grid2>
+                <Grid2 item sm={12}>
+                    <TextField
+                        fullWidth
+                        required
+                        label="Password"
+                        id="pasword"
+                        value={userDetails.password}
+                        name="password"
+                        onChange={(e) => onChangeHandler(e)}
+                    />
+                </Grid2>
+                <Grid2 item sm={12}>
+                    <Button fullWidth variant="contained" onClick={() => handleLogin()}>Login</Button>
+                </Grid2>
+            </Grid2>
+            </Card>
         </Box>
     )
 }
