@@ -20,6 +20,8 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Product from './components/Product';
 import Village from './components/Village';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const drawerWidth = 240;
 
@@ -124,6 +126,7 @@ export default function Dashboard(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      <ToastContainer autoClose={2000} icon={false}/>
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton

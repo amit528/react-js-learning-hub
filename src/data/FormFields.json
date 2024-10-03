@@ -33,11 +33,13 @@
             },
             {
                 "id": "district",
+                "required" : true,
                 "name": "district",
                 "lable": "District"
             },
             {
                 "id": "village",
+                "required" : true,
                 "name": "village",
                 "lable": "Village"
             },
