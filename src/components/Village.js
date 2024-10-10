@@ -21,7 +21,7 @@ function Village() {
         fetch('https://jsonplaceholder.typicode.com/todos')
         .then(response => response.json())
         .then(json => setRows(json))
-    })
+    },[])
 
     const handleAddClick = () =>{
         setMode("form")

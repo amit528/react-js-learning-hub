@@ -45,9 +45,7 @@ function FormComponent(props) {
         array.unshift(entity)
         props.setRows(array)
         localStorage.setItem("productData", JSON.stringify(array))
-        toast.success("Data addedd successfully", {
-            icon: "🚀"
-        })
+        toast.success("Data addedd successfully")
     }
 
     const handleCancel = () =>{

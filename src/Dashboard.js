@@ -22,6 +22,11 @@ import Product from './components/Product';
 import Village from './components/Village';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UserList from './components/UserList';
+import { Collapse, Tooltip } from '@mui/material';
+import { Drafts, ExpandLess, ExpandMore, Mail, Person2Rounded } from '@mui/icons-material';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 
 const drawerWidth = 240;
 
@@ -106,6 +111,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function Dashboard(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [collapse, setCollapse] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -113,20 +119,51 @@ export default function Dashboard(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+    setCollapse(false)
   };
 
   const [dbState, setDbState] = React.useState(sessionStorage.getItem("dashboardState") || "dashboard")
 
+  // "Dashboard", 'Product', 'Village', 'User List'
+
+  const menuItems = [
+    { 
+      name: "Dashboard",
+      icon : <DashboardIcon />,
+      subMenu : [],
+    },
+    {
+      name: "Manage Masters",
+      icon : <SpaceDashboardIcon />,
+      subMenu: [
+        { 
+          name: "Product",
+          icon : <Drafts />
+        },
+        { 
+          name: "Village",
+          icon : <Mail />
+        }
+      ]
+    },
+    { 
+      name: "Manage Users",
+      icon : <Person2Rounded />,
+      subMenu : [],
+    },
+  ]
+
   const handleChangeMenu = (menuName) =>{
-    sessionStorage.setItem("dashboardState", menuName)
-    setDbState(sessionStorage.getItem("dashboardState"))
+    setCollapse(!collapse)
+    // sessionStorage.setItem("dashboardState", menuName)
+    // setDbState(sessionStorage.getItem("dashboardState"))
   }
 
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <ToastContainer autoClose={2000} icon={false}/>
+      <ToastContainer autoClose={5000} />
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -156,23 +193,9 @@ export default function Dashboard(props) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Dashboard", 'Product', 'Village', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={() => handleChangeMenu(text)}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
+          {menuItems.map((item, index) => (
+            <>
+              <ListItemButton onClick={() => handleChangeMenu(item.name)}>
                 <ListItemIcon
                   sx={[
                     {
@@ -188,22 +211,42 @@ export default function Dashboard(props) {
                         },
                   ]}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {item.icon}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
+                  primary={item.name}
+                  
                 />
+                
+                {item.subMenu.length > 0 && (collapse ? <ExpandLess /> : <ExpandMore />)}
               </ListItemButton>
-            </ListItem>
+              
+            {item.subMenu.length > 0 && 
+            <Collapse in={collapse} timeout="auto" unmountOnExit>
+            {item.subMenu.map((subMenus) => (
+             
+              <List component="div" disablePadding>
+                <ListItem
+                  button
+                  sx={{
+                    pl: 4,
+                  }}
+                  onClick={() => handleChangeMenu(item.name)}
+                  // selected={dashboardState === "ManageProducts"}
+                >
+                  <ListItemIcon
+                  >
+                    <Tooltip title={subMenus.name}>
+                      {subMenus.icon}
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary={subMenus.name} />
+                </ListItem>
+              </List>
+            ))}
+             </Collapse>
+             }
+            </>
           ))}
         </List>
       </Drawer>
@@ -223,12 +266,8 @@ export default function Dashboard(props) {
             <Village />
         }
         {
-            dbState === "Send email" && 
-            <Typography>Welcome to Send email</Typography>
-        }
-        {
-            dbState === "Drafts" && 
-            <Typography>Welcome to Drafts</Typography>
+            dbState === "User List" && 
+            <UserList />
         }
       </Box>
     </Box>
