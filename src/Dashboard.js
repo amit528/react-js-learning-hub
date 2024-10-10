@@ -112,6 +112,7 @@ export default function Dashboard(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [collapse, setCollapse] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -120,6 +121,14 @@ export default function Dashboard(props) {
   const handleDrawerClose = () => {
     setOpen(false);
     setCollapse(false)
+  };
+
+  const handleOptionClick = (index) => {
+    if (selectedIndex === index) {
+      setSelectedIndex(null);
+    } else {
+      setSelectedIndex(index);
+    }
   };
 
   const [dbState, setDbState] = React.useState(sessionStorage.getItem("dashboardState") || "dashboard")
@@ -149,14 +158,22 @@ export default function Dashboard(props) {
     { 
       name: "Manage Users",
       icon : <Person2Rounded />,
-      subMenu : [],
+      subMenu : [
+        { 
+          name: "Add User",
+          icon : <Drafts />
+        },
+        { 
+          name: "User List",
+          icon : <Drafts />
+        },
+      ],
     },
   ]
 
   const handleChangeMenu = (menuName) =>{
-    setCollapse(!collapse)
-    // sessionStorage.setItem("dashboardState", menuName)
-    // setDbState(sessionStorage.getItem("dashboardState"))
+    sessionStorage.setItem("dashboardState", menuName)
+    setDbState(sessionStorage.getItem("dashboardState"))
   }
 
 
@@ -195,7 +212,7 @@ export default function Dashboard(props) {
         <List>
           {menuItems.map((item, index) => (
             <>
-              <ListItemButton onClick={() => handleChangeMenu(item.name)}>
+              <ListItemButton onClick={(e)=> handleOptionClick(index)}>
                 <ListItemIcon
                   sx={[
                     {
@@ -218,11 +235,11 @@ export default function Dashboard(props) {
                   
                 />
                 
-                {item.subMenu.length > 0 && (collapse ? <ExpandLess /> : <ExpandMore />)}
+                {item.subMenu.length > 0 && (selectedIndex === index ? <ExpandLess /> : <ExpandMore />)}
               </ListItemButton>
               
             {item.subMenu.length > 0 && 
-            <Collapse in={collapse} timeout="auto" unmountOnExit>
+            <Collapse in={selectedIndex === index} timeout="auto" unmountOnExit>
             {item.subMenu.map((subMenus) => (
              
               <List component="div" disablePadding>
@@ -231,8 +248,8 @@ export default function Dashboard(props) {
                   sx={{
                     pl: 4,
                   }}
-                  onClick={() => handleChangeMenu(item.name)}
-                  // selected={dashboardState === "ManageProducts"}
+                  onClick={() => handleChangeMenu(subMenus.name)}
+                  selected={dbState === subMenus.name}
                 >
                   <ListItemIcon
                   >
