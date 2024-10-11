@@ -24,9 +24,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserList from './components/UserList';
 import { Collapse, Tooltip } from '@mui/material';
-import { Drafts, ExpandLess, ExpandMore, Mail, Person2Rounded } from '@mui/icons-material';
+import { ExpandLess, ExpandMore, Mail } from '@mui/icons-material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import ListIcon from '@mui/icons-material/List';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { AddTask } from './components/AddTask';
 
 const drawerWidth = 240;
 
@@ -142,33 +146,19 @@ export default function Dashboard(props) {
       subMenu : [],
     },
     {
-      name: "Manage Masters",
-      icon : <SpaceDashboardIcon />,
+      name: "Manage Tasks",
+      icon : <ListAltIcon />,
       subMenu: [
         { 
-          name: "Product",
-          icon : <Drafts />
+          name: "Add Task",
+          icon : <AddTaskIcon />
         },
         { 
-          name: "Village",
-          icon : <Mail />
+          name: "List Tasks",
+          icon : <ListIcon />
         }
       ]
-    },
-    { 
-      name: "Manage Users",
-      icon : <Person2Rounded />,
-      subMenu : [
-        { 
-          name: "Add User",
-          icon : <Drafts />
-        },
-        { 
-          name: "User List",
-          icon : <Drafts />
-        },
-      ],
-    },
+    }
   ]
 
   const handleChangeMenu = (menuName) =>{
@@ -212,7 +202,10 @@ export default function Dashboard(props) {
         <List>
           {menuItems.map((item, index) => (
             <>
-              <ListItemButton onClick={(e)=> handleOptionClick(index)}>
+              <ListItemButton onClick={(e)=> {
+                item.subMenu.length > 0 ? handleOptionClick(index) :
+                handleChangeMenu(item.name)
+              }}>
                 <ListItemIcon
                   sx={[
                     {
@@ -232,10 +225,10 @@ export default function Dashboard(props) {
                 </ListItemIcon>
                 <ListItemText
                   primary={item.name}
-                  
+                  sx={{ opacity: open ? 1 : 0,ml:1 }}
                 />
                 
-                {item.subMenu.length > 0 && (selectedIndex === index ? <ExpandLess /> : <ExpandMore />)}
+                {item.subMenu.length > 0 && (selectedIndex === index ? <ExpandLess sx={{ opacity: open ? 1 : 0,ml:1 }}/> : <ExpandMore sx={{ opacity: open ? 1 : 0,ml:1 }}/>)}
               </ListItemButton>
               
             {item.subMenu.length > 0 && 
@@ -275,16 +268,12 @@ export default function Dashboard(props) {
         }
 
         {
-            dbState === "Product" && 
-            <Product />
+            dbState === "Add Task" && 
+            <AddTask />
         }
         {
-            dbState === "Village" && 
+            dbState === "List Tasks" && 
             <Village />
-        }
-        {
-            dbState === "User List" && 
-            <UserList />
         }
       </Box>
     </Box>

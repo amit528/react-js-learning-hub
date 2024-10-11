@@ -1,12 +1,63 @@
-[
-  {
-    "id": 1,
+{
+  "developer": {
     "name": "John Doe",
-    "email": "john@example.com"
-  },
-  {
-    "id": 2,
-    "name": "Jane Doe",
-    "email": "jane@example.com"
+    "role": "React.js Developer",
+    "tasks": [
+      {
+        "id": 1,
+        "label": "Build React Component for User Dashboard",
+        "description": "Develop a reusable React component for the user dashboard with responsive design. Integrate API calls for user-specific data.",
+        "status": "In Progress",
+        "priority": "High",
+        "deadline": "2024-10-15",
+        "assigned_at": "2024-10-01",
+        "completed_at": null,
+        "dependencies": ["API Integration", "UI Design"]
+      },
+      {
+        "id": 2,
+        "label": "Fix Bugs in Authentication Flow",
+        "description": "Debug and fix issues in the user login and registration flow, including session handling and error messaging.",
+        "status": "Completed",
+        "priority": "Medium",
+        "deadline": "2024-09-30",
+        "assigned_at": "2024-09-20",
+        "completed_at": "2024-09-28",
+        "dependencies": ["Backend Auth API", "Unit Tests"]
+      },
+      {
+        "id": 3,
+        "label": "Optimize React Application for Performance",
+        "description": "Refactor the existing codebase to improve application load times and rendering speed. Use memoization, lazy loading, and code splitting.",
+        "status": "In Progress",
+        "priority": "High",
+        "deadline": "2024-10-20",
+        "assigned_at": "2024-10-05",
+        "completed_at": null,
+        "dependencies": ["Code Review", "Testing"]
+      },
+      {
+        "id": 4,
+        "label": "Update to React 18",
+        "description": "Upgrade the project from React 17 to React 18. Test for compatibility and fix any breaking changes.",
+        "status": "Not Started",
+        "priority": "Medium",
+        "deadline": "2024-11-01",
+        "assigned_at": "2024-10-10",
+        "completed_at": null,
+        "dependencies": ["Package Updates", "Testing"]
+      },
+      {
+        "id": 5,
+        "label": "Implement Redux for State Management",
+        "description": "Migrate the current context-based state management to Redux for better scalability and predictability.",
+        "status": "In Review",
+        "priority": "High",
+        "deadline": "2024-10-12",
+        "assigned_at": "2024-09-25",
+        "completed_at": null,
+        "dependencies": ["Code Review", "Testing"]
+      }
+    ]
   }
-]
+}

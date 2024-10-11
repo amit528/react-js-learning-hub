@@ -19,7 +19,7 @@ const UserList = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log(typeof(data));
         
         setData(data);
         setLoading(false); // Set loading to false after data is fetched
