@@ -1,7 +1,7 @@
-const strapiURL = 'http://localhost:1337';
+const baseurl = 'https://jsonplaceholder.typicode.com';
 
 export const apiUrls = {
-    article : strapiURL + '/api/articles',
+    post : baseurl + '/posts'
 }
 
 

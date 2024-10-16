@@ -5,7 +5,10 @@ import { CardBody, CardHeader } from "react-bootstrap";
 export function AddTask() {
     const [tasks, setTasks] = useState([])
     const [selectedItem, setSelectedItem] = useState([])
-
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+  
     useEffect(() => {
         getTasks()
     },[])
@@ -33,9 +36,47 @@ export function AddTask() {
     
     function handleSelect(e, record){ 
         setSelectedItem([...selectedItem, record])
-        let filteredData = tasks.filter(item => item.id != record.id)  
-        setTasks(filteredData)        
+        // let filteredData = tasks.filter(item => item.id != record.id)  
+        // setTasks(filteredData)        
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const jsonData = await response.json();
+            setData(jsonData);
+          } catch (err) {
+            setError(err.message);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        // Fetching data from a sample API
+        fetch('https://jsonplaceholder.typicode.com/posts')
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((jsonData) => {
+            setData(jsonData); // Store the data in the state
+            setLoading(false); // Stop loading when data is fetched
+          })
+          .catch((err) => {
+            setError(err.message); // Handle the error
+            setLoading(false); // Stop loading in case of error
+          });
+      }, []);
     
     return(
         <Card sx={{ padding : "2rem" }}>
@@ -46,7 +87,7 @@ export function AddTask() {
                 <Autocomplete
                     // getOptionLabel={(task) => task.title}
                     disablePortal
-                    options={availableItems}
+                    options={tasks}
                     sx={{ width: "auto" }}
                     renderInput={(params) => <TextField {...params} label="Movie" />}
                     onChange={handleSelect}

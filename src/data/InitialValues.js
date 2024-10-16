@@ -22,6 +22,16 @@ export function initial(value) {
                     }
                     return product;
                 }
+            case 'posts':
+                {
+                    const posts =
+                    {
+                        titl : "",
+                        body : "",
+                        userId : ""
+                    }
+                    return posts;
+                }
             default:
                 return
         }

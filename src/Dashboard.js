@@ -31,6 +31,7 @@ import AddTaskIcon from '@mui/icons-material/AddTask';
 import ListIcon from '@mui/icons-material/List';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { AddTask } from './components/AddTask';
+import Posts from './components/Posts';
 
 const drawerWidth = 240;
 
@@ -158,6 +159,11 @@ export default function Dashboard(props) {
           icon : <ListIcon />
         }
       ]
+    },
+    { 
+      name: "Manage Posts",
+      icon : <ListAltIcon />,
+      subMenu : [],
     }
   ]
 
@@ -274,6 +280,10 @@ export default function Dashboard(props) {
         {
             dbState === "List Tasks" && 
             <Village />
+        }
+        {
+            dbState === "Manage Posts" && 
+            <Posts />
         }
       </Box>
     </Box>

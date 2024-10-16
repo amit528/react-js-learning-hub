@@ -49,5 +49,30 @@
                 "lable": "Description"
             }
         ]
+    },
+    "posts": {
+        "title": "Post Form",
+        "inputInfo": [
+            {
+                "id": "title",
+                "required" : true,
+                "name": "titl",
+                "lable": "Title"
+            },
+            {
+                "id": "body",
+                "required" : true,
+                "name": "body",
+                "lable": "Description"
+            },
+            {
+                "id": "userId",
+                "required" : true,
+                "type" : "select",
+                "options" : [],
+                "name": "userId",
+                "lable": "User name"
+            }
+        ]
     }
 }

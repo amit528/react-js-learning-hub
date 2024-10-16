@@ -133,49 +133,20 @@ const putApiCallA = async (endpoint, request) => {
 //Post Method - - call by passing endpoint and request body
 const postApiCall = async (endpoint, request) => {
   //console.log('reqbody', request);
-  var token = sessionStorage.getItem("token")
+  // var token = sessionStorage.getItem("token")
   let reqbody = JSON.stringify(request)
   let result = await fetch(endpoint, {
           // mode: 'no-cors',
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
-              'Authorization': "Bearer " + token,
+              // 'Authorization': "Bearer " + token,
               "Allow-Origin": "*",
           },
           body: reqbody,
       }).then(apiresponse => {
           return apiresponse.json();
       }).then(data => {
-        return data
-      })
-      .catch(error => {
-          //failure or error
-          return error.response;
-      });
-  // console.log(result)
-  return result;
-}
-
-//Post Method - - call by passing endpoint and request body
-const postApiCallWithoutToken = async (endpoint, request) => {
-  console.log('reqbody', request);
-  let reqbody = JSON.stringify(request)
-  console.log(reqbody);
-  let result = await fetch(endpoint, {
-          // mode: 'no-cors',
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              "Allow-Origin": "*",
-          },
-          body: reqbody,
-      }).then(apiresponse => {
-          return apiresponse.json();
-      }).then(data => {
-        if(data.payload){
-          return decryptData(data.payload);
-        }
         return data
       })
       .catch(error => {
@@ -417,7 +388,6 @@ export {
   getApiCallA,
   deleteApiCallA,
   putApiCallA,
-  postApiCallWithoutToken,
   putApiCallWithoutToken
   // deleteApiCallUser
 };
