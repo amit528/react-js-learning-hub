@@ -18,10 +18,8 @@ function Posts() {
         { field: 'title', headerName: 'Title', minWidth : 200, width: 150, flex : 1 },
         { field: 'body', headerName: 'Description', minWidth : 150, width: 150, flex : 1 },
         { field: 'userId', headerName: 'User name', minWidth : 150, width: 150, flex : 1, valueFormatter: (value) =>{            
-            let userData = users.filter((item) => item.id == value)
-            console.log(userData);
-                        
-            return userData[0].username + ", " + userData[0].name
+            let userData = users.filter((item) => item.id == value)                        
+            return userData[0].username
         } },
     ];
 
@@ -36,9 +34,7 @@ function Posts() {
             if (!response.ok) {
             throw new Error('Network response was not ok');
             }
-            const jsonData = await response.json();
-            console.log("posts", jsonData);
-            
+            const jsonData = await response.json();            
             setRows(jsonData);
         } catch (err) {
             setError(err.message);

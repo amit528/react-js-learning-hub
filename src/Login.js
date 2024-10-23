@@ -1,12 +1,15 @@
+import { useTheme } from "@emotion/react";
 import { Box, Button, Card, Grid, Grid2, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 function Login(props) {
     const [userDetails, setUserDetails] = useState({
-        username : "",
+        username : "amit",
         password : ""
     })
 
+    const useStyle = useTheme()    
+    
     function onChangeHandler(e) {        
         setUserDetails({...userDetails, [e.target.name] : e.target.value})
     }    
@@ -38,12 +41,12 @@ function Login(props) {
                 width: 400,
                 marginBottom: "30px",
                 borderRadius: "20px",
-                boxShadow: "5px 10px 18px #888888",
+                boxShadow: "5px 10px 18px #888888"
             }}
         >
             <Grid2 container gap={2}>
                 <Grid2 item lg={12}>
-                    <Typography variant="h3" textAlign={"center"}>SMK SOLUTIONS</Typography>
+                    <Typography variant="h3" color={useStyle.typography.caption.color} textAlign={"center"}>SMK SOLUTIONS</Typography>
                 </Grid2>
                 <Grid2 item lg={12}>
                     <TextField

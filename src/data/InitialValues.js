@@ -26,7 +26,7 @@ export function initial(value) {
                 {
                     const posts =
                     {
-                        titl : "",
+                        title : "",
                         body : "",
                         userId : ""
                     }

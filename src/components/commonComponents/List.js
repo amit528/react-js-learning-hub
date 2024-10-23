@@ -8,7 +8,7 @@ function ListComponent(props) {
                 columnHeaderHeight={40}
                 rows={props.rows || []}
                 columns={props.columns || []}
-                getRowHeight={() => 'auto'}
+                getRowHeight={() => '30'}
                 rowHeight={30}
             />
         </Box>

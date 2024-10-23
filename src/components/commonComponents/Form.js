@@ -6,7 +6,7 @@ import { createPost } from "../../api/methods";
 function FormComponent(props) {
     const [entity, setEntity] = useState(props.entity)
     const [count, setCount] = useState(0)
-    const [error, setError] = useState({})
+    const [error, setError] = useState({})    
 
     const onValueChange = (e) =>{
         setEntity({...entity, [e.target.name] : e.target.value})
@@ -14,17 +14,14 @@ function FormComponent(props) {
 
     const validate = (values) =>{
         const error = {}
-        console.log(values);
-        
-        if(values.division === ""){
-            error.division = "Division is required"
-        }
-        if(values.district === ""){
-            error.district = "District is required"
-        }
-        if(values.village === ""){
-            error.village = "Village is required"
-        }
+        props.inputDetails.map((item) => {
+            if(item.required){
+                if(values[item.name] == ""){
+                    error[item.name] = `${item.lable} is required!`;
+                }
+            }
+        })
+
         return error
     }
 
@@ -50,6 +47,11 @@ function FormComponent(props) {
     // }
 
     const handleSubmit = async () => {
+        let validationResult = validate(entity)
+        setError(validationResult)
+        if (!isEmpty(validationResult)) {
+            return;
+          }
         await createPost(entity).then((res) =>{
             console.log(res);
             

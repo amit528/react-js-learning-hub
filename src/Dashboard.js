@@ -23,7 +23,7 @@ import Village from './components/Village';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserList from './components/UserList';
-import { Collapse, Tooltip } from '@mui/material';
+import { Collapse, Switch, Tooltip } from '@mui/material';
 import { ExpandLess, ExpandMore, Mail } from '@mui/icons-material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
@@ -118,7 +118,10 @@ export default function Dashboard(props) {
   const [open, setOpen] = React.useState(false);
   const [collapse, setCollapse] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(null);
+  const [checked, setChecked] = React.useState(false)
 
+  const useStyle = useTheme()    
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -172,13 +175,21 @@ export default function Dashboard(props) {
     setDbState(sessionStorage.getItem("dashboardState"))
   }
 
+  const toggleMode = () => {
+    props.setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <ToastContainer autoClose={5000} />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar
+          sx={{
+            justifyContent : "space-between"
+          }}
+        >
+          <div style={{ display:"flex", alignItems : "center", justifyContent : "flex-start"}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -193,9 +204,11 @@ export default function Dashboard(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            SMK SOLUTIONS
+          <Typography variant="h5" fontWeight={800} noWrap component="div">
+            <span style={{ color : "red" }}>SMK</span> SOLUTIONS
           </Typography>
+          </div>
+          <Typography>Day<Switch checked={props.mode == "dark"} onChange={(e) => toggleMode()} color='secondary'/>Night</Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
